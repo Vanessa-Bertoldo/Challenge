@@ -36,6 +36,7 @@ class LeitorEmailActivity : ComponentActivity() {
             }
         }
     }
+}
 
 @Composable
 fun TelaLeitorEmail() {
