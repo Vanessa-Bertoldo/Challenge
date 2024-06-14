@@ -39,19 +39,19 @@ import br.com.fiap.challenge.ui.theme.ChallengeTheme
 import java.time.YearMonth
 
 class CalendarActivity : AppCompatActivity() {
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ChallengeTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    CalendarView()
-                }
-            }
-        }
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContent {
+//            ChallengeTheme {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colorScheme.background
+//                ) {
+//                    CalendarView()
+//                }
+//            }
+//        }
     }
 
 
@@ -71,7 +71,8 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(26)    @Composable
+    @RequiresApi(26)
+    @Composable
     fun CalendarView(){
         var currentYearMonth by remember { mutableStateOf(YearMonth.now()) }
 
@@ -163,4 +164,4 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
-}
+//}
