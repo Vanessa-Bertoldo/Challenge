@@ -61,6 +61,7 @@ fun Pesquisar() {
             .fillMaxWidth()
             .background(Color(0xFF024873))
             .fillMaxHeight()
+            .padding(top = 2.dp)
     ) {
 
 
