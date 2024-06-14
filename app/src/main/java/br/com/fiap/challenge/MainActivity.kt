@@ -12,8 +12,12 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, CalendarActivity::class.java))
-        finish()
+        window.decorView.post {
+            startActivity(Intent(this, CalendarActivity::class.java))
+            window.decorView.postDelayed({
+                finish()
+            }, 500)
+        }
     }
 }
 
