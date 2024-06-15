@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Challenge"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".activities.LeitorEmailActivity"-->
+<!--            android:exported="true"-->
+<!--            android:label="@string/title_activity_leitor_email"-->
+<!--            android:theme="@style/Theme.Challenge" />-->
+<!--        <activity-->
+<!--            android:name=".activities.CaixaEntradaActivity"-->
+<!--            android:exported="false"/>-->
         <activity
-            android:name=".activitys.LeitorEmailActivity"
-            android:exported="true"
-            android:label="@string/title_activity_leitor_email"
-            android:theme="@style/Theme.Challenge" />
-        <activity
-            android:name=".activitys.CaixaEntradaActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".activitys.CalendarActivity"
+            android:name=".activities.CalendarActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

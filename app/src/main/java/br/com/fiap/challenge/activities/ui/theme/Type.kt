@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.activitys.ui.theme
+package br.com.fiap.challenge.activities.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
