@@ -13,11 +13,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -48,37 +52,86 @@ class CalendarActivity : AppCompatActivity() {
 //        }
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(26)
     @Composable
     fun CalendarView(navController: NavController){
         var currentYearMonth by remember { mutableStateOf(YearMonth.now()) }
 
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+//        Column(
+//            modifier = Modifier
+//                .padding(16.dp)
+//                .fillMaxWidth()
+//        ) {
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                IconButton(
+//                    onClick = { currentYearMonth = currentYearMonth.minusMonths(1) },
+//                    modifier = Modifier.size(48.dp)
+//                ) {
+//                    Icon(Icons.Default.ChevronLeft, contentDescription = "Previous Month")
+//                }
+//                MonthHeader(currentYearMonth)
+//                IconButton(
+//                    onClick = { currentYearMonth = currentYearMonth.plusMonths(1) },
+//                    modifier = Modifier.size(48.dp)
+//                ) {
+//                    Icon(Icons.Default.ChevronRight, contentDescription = "Next Month")
+//                }
+//            }
+//            WeekDaysHeader()
+//            CalendarDays(currentYearMonth)
+//        }
+
+
+        Column {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Agenda",
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
             ) {
-                IconButton(
-                    onClick = { currentYearMonth = currentYearMonth.minusMonths(1) },
-                    modifier = Modifier.size(48.dp)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(Icons.Default.ChevronLeft, contentDescription = "Previous Month")
+                    IconButton(
+                        onClick = { currentYearMonth = currentYearMonth.minusMonths(1) },
+                        modifier = Modifier.size(48.dp)
+                    ) {
+                        Icon(Icons.Default.ChevronLeft, contentDescription = "Previous Month")
+                    }
+                    MonthHeader(currentYearMonth)
+                    IconButton(
+                        onClick = { currentYearMonth = currentYearMonth.plusMonths(1) },
+                        modifier = Modifier.size(48.dp)
+                    ) {
+                        Icon(Icons.Default.ChevronRight, contentDescription = "Next Month")
+                    }
                 }
-                MonthHeader(currentYearMonth)
-                IconButton(
-                    onClick = { currentYearMonth = currentYearMonth.plusMonths(1) },
-                    modifier = Modifier.size(48.dp)
-                ) {
-                    Icon(Icons.Default.ChevronRight, contentDescription = "Next Month")
-                }
+                WeekDaysHeader()
+                CalendarDays(currentYearMonth)
             }
-            WeekDaysHeader()
-            CalendarDays(currentYearMonth)
         }
     }
 

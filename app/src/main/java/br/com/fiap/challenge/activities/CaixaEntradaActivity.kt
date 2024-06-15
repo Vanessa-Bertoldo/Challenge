@@ -15,15 +15,16 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -34,53 +35,63 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.challenge.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CaixaEntrada(navController: NavController) {
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0xFF012E40))
-            .fillMaxHeight()
-            .padding(top = 2.dp)
-    ) {
-
-
-        OutlinedTextField(
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Caixa de entrada",
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            )
+        }
+    ) { innerPadding ->
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-
                 .fillMaxWidth()
-                .height(60.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedTextColor = Color.White,
-                unfocusedBorderColor = Color.White,
-                unfocusedLabelColor = Color.White,
-                unfocusedLeadingIconColor = Color.White
-            ),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search, contentDescription = null
-                )
-            },
-            value = "Digite o assunto do email",
-            onValueChange = {},
-        )
+                .background(Color(0xFF012E40))
+                .fillMaxHeight()
+                .padding(innerPadding)
+                .padding(top = 2.dp)
+        ) {
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedTextColor = Color.White,
+                    unfocusedBorderColor = Color.White,
+                    unfocusedLabelColor = Color.White,
+                    unfocusedLeadingIconColor = Color.White
+                ),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search, contentDescription = null
+                    )
+                },
+                value = "Digite o assunto do email",
+                onValueChange = {},
+            )
 
-
-        CardEmail()
-        CardEmail()
-        MenuRodape(navController)
-
+            CardEmail()
+            CardEmail()
+            MenuRodape(navController)
+        }
     }
-
-
 }
+
 
 @Composable
 fun CardEmail() {
