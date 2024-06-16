@@ -12,11 +12,11 @@ class EmailRepository(context: Context) {
         return db.novoEmail(email = email)
     }
 
-    fun buscarEmailId(id: Long): Email {
-        return db.buscarEmailId(id = id)
+    fun buscarEmailId(id: Long?): Email {
+        return db.buscarEmailId(id = id!!)
     }
 
-    fun buscarEmailId(): List<Email> {
+    fun buscarTodosEmail(): List<Email> {
         return db.buscarTodosEmail()
     }
 }
