@@ -2,13 +2,13 @@ package br.com.fiap.challenge.activities
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -60,7 +60,7 @@ fun NovoEmail(navController: NavController) {
             )
         },
         content = { innerPadding ->
-            Column(
+            LazyColumn(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxSize()
@@ -69,54 +69,69 @@ fun NovoEmail(navController: NavController) {
                     .background(color = Color.LightGray),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(text = "Nova mensagem")
-
-                OutlinedTextField(
-                    value = to, onValueChange = { to = it },
-                    label = { Text(text = "Para") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(color = Color.White),
-                )
-                OutlinedTextField(
-                    value = cc, onValueChange = { cc = it },
-                    label = { Text(text = "CC") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                OutlinedTextField(
-                    value = cco, onValueChange = { cco = it },
-                    label = { Text(text = "Cco") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                OutlinedTextField(
-                    value = assunto, onValueChange = { assunto = it },
-                    label = { Text(text = "Assunto") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                OutlinedTextField(
-                    value = body,
-                    onValueChange = { body = it },
-                    label = { Text(text = "Corpo do email") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(350.dp),
-                    maxLines = 50
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .background(Color.Black)
-                        .fillMaxWidth()
-                ) {
-                    Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Anexo")
-                    }
-                    Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Foto")
-                    }
-                    Button(onClick = { /*TODO*/ }) {
-                        Text(text = "Enviar")
+                item {
+                    Text(text = "Nova mensagem")
+                }
+                item {
+                    OutlinedTextField(
+                        value = to, onValueChange = { to = it },
+                        label = { Text(text = "Para") },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(color = Color.White),
+                    )
+                }
+                item {
+                    OutlinedTextField(
+                        value = cc, onValueChange = { cc = it },
+                        label = { Text(text = "CC") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                item {
+                    OutlinedTextField(
+                        value = cco, onValueChange = { cco = it },
+                        label = { Text(text = "Cco") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                item {
+                    OutlinedTextField(
+                        value = assunto, onValueChange = { assunto = it },
+                        label = { Text(text = "Assunto") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+                item {
+                    OutlinedTextField(
+                        value = body,
+                        onValueChange = { body = it },
+                        label = { Text(text = "Corpo do email") },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(350.dp),
+                        maxLines = 50
+                    )
+                }
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+                item {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .background(Color.Black)
+                            .fillMaxWidth()
+                    ) {
+                        Button(onClick = { /*TODO*/ }) {
+                            Text(text = "Anexo")
+                        }
+                        Button(onClick = { /*TODO*/ }) {
+                            Text(text = "Foto")
+                        }
+                        Button(onClick = { /*TODO*/ }) {
+                            Text(text = "Enviar")
+                        }
                     }
                 }
             }
