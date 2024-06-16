@@ -1,5 +1,6 @@
 package br.com.fiap.challenge.activities
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -30,15 +31,46 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import br.com.fiap.challenge.database.repository.EmailRepository
+import br.com.fiap.challenge.model.Email
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NovoEmail(navController: NavController) {
+fun NovoEmail(navController: NavController, context: Context) {
     var to by remember { mutableStateOf("") }
     var cc by remember { mutableStateOf("") }
-    var cco by remember { mutableStateOf("") }
-    var assunto by remember { mutableStateOf("") }
+    var bcc by remember { mutableStateOf("") }
+    var subject by remember { mutableStateOf("") }
     var body by remember { mutableStateOf("") }
+    var showMessage by remember { mutableStateOf(false) }
+    var message by remember { mutableStateOf("") }
+
+    val emailRepository = remember { EmailRepository(context) }
+
+    fun sendEmail() {
+        if (to.isEmpty() || subject.isEmpty() || body.isEmpty()) {
+            message = "Os campos Para, Assunto e Corpo do email são obrigatórios."
+            showMessage = true
+            return
+        }
+
+        val email = Email(
+            //id = 1,
+            nomeDestinatario = to,
+            nomeAssunto = subject,
+            texto = body,
+            nomeRemetente = ""
+        )
+
+        val emailId = emailRepository.novoEmail(email)
+
+        if (emailId > 0) {
+            message = "Email enviado com sucesso!"
+        } else {
+            message = "Erro ao enviar email."
+        }
+        showMessage = true
+    }
 
     Scaffold(
         topBar = {
@@ -90,14 +122,14 @@ fun NovoEmail(navController: NavController) {
                 }
                 item {
                     OutlinedTextField(
-                        value = cco, onValueChange = { cco = it },
-                        label = { Text(text = "Cco") },
+                        value = bcc, onValueChange = { bcc = it },
+                        label = { Text(text = "CCO") },
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
                 item {
                     OutlinedTextField(
-                        value = assunto, onValueChange = { assunto = it },
+                        value = subject, onValueChange = { subject = it },
                         label = { Text(text = "Assunto") },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -129,13 +161,21 @@ fun NovoEmail(navController: NavController) {
                         Button(onClick = { /*TODO*/ }) {
                             Text(text = "Foto")
                         }
-                        Button(onClick = { /*TODO*/ }) {
+                        Button(onClick = { sendEmail() }) {
                             Text(text = "Enviar")
                         }
+                    }
+                }
+                if (showMessage) {
+                    item {
+                        Text(
+                            text = message,
+                            color = if (message.contains("sucesso")) Color.Green else Color.Red,
+                            modifier = Modifier.padding(8.dp)
+                        )
                     }
                 }
             }
         }
     )
 }
-

@@ -17,7 +17,6 @@ import androidx.navigation.compose.rememberNavController
 import br.com.fiap.challenge.activities.CaixaEntrada
 import br.com.fiap.challenge.activities.CalendarView
 import br.com.fiap.challenge.activities.DetalheEmail
-import br.com.fiap.challenge.activities.NovoEmail
 import br.com.fiap.challenge.ui.theme.ChallengeTheme
 
 
@@ -36,7 +35,7 @@ class MainActivity : ComponentActivity() {
                             CaixaEntrada(navController)
                         }
                         composable(route = "novo-email") {
-                            NovoEmail(navController)
+                            //NovoEmail(navController)
                         }
                         composable(route = "calendario") {
                             CalendarView(navController)
