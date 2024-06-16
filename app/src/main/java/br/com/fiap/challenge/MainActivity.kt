@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ChallengeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize().fillMaxHeight().background(Color(0xFF012E40))
+                    modifier = Modifier.fillMaxSize().fillMaxHeight().background(Color.White)
                 ) {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "home") {

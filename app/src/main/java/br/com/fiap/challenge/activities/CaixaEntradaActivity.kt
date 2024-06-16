@@ -51,7 +51,7 @@ fun CaixaEntrada(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFF012E40))
+                .background(Color(0xFF024959))
                 .fillMaxHeight()
                 .padding(innerPadding)
                 .padding(top = 2.dp)
@@ -107,7 +107,7 @@ fun CardEmail(idEmail:Long, nomeAssunto: String, nomeRemetente:String, navContro
             .height(65.dp)
             .clickable {
                 navController.navigate("detalhe-email/$idEmail")},
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF024959)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF026773)),
         shape = RoundedCornerShape(0.dp),
         border = BorderStroke(1.dp, Color(0xFF024959))
     ) {
