@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -76,7 +75,6 @@ fun CaixaEntrada(navController: NavController) {
             )
 
             buscarEmails(navController)
-
         }
     }
 }
@@ -92,13 +90,18 @@ fun buscarEmails(navController: NavController) {
 
     for (i in listaEmail) {
         Log.d("Iterator", i.toString())
-        CardEmail(i.id, i.nomeAssunto, i.nomeDestinatario, navController )
+        CardEmail(i.id, i.nomeAssunto, i.nomeDestinatario, navController)
     }
 }
 
 
 @Composable
-fun CardEmail(idEmail:Long, nomeAssunto: String, nomeRemetente:String, navController: NavController) {
+fun CardEmail(
+    idEmail: Long,
+    nomeAssunto: String,
+    nomeRemetente: String,
+    navController: NavController
+) {
 
     Card(
         modifier = Modifier
@@ -106,10 +109,11 @@ fun CardEmail(idEmail:Long, nomeAssunto: String, nomeRemetente:String, navContro
             .padding(top = 5.dp)
             .height(65.dp)
             .clickable {
-                navController.navigate("detalhe-email/$idEmail")},
+                navController.navigate("detalhe-email/$idEmail")
+            },
         colors = CardDefaults.cardColors(containerColor = Color(0xFF026773)),
         shape = RoundedCornerShape(0.dp),
-        border = BorderStroke(1.dp, Color(0xFF024959))
+        border = BorderStroke(1.dp, Color.White)
     ) {
         Text(
             modifier = Modifier.padding(start = 5.dp, top = 10.dp),

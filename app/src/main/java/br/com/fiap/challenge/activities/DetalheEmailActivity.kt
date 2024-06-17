@@ -1,11 +1,12 @@
 package br.com.fiap.challenge.activities
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
@@ -17,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.challenge.components.TopBar
 import br.com.fiap.challenge.database.repository.EmailRepository
@@ -49,8 +49,10 @@ fun DetalheEmail(navController: NavController, idEmail: String?) {
                         containerColor = Color(0xFF026773),
                     ),
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    shape = CardDefaults.elevatedShape
+                        .fillMaxWidth()
+                        .padding(top = 3.dp),
+                    shape = RoundedCornerShape(0.dp),
+                    border = BorderStroke(1.dp, Color.White)
                 ) {
                     Text(
                         text = email.nomeAssunto,
@@ -61,26 +63,24 @@ fun DetalheEmail(navController: NavController, idEmail: String?) {
                     )
                 }
 
-                Column() {
-                    Row {
-                        Column(Modifier.padding(vertical = 10.dp)) {
-                            Text(
-                                text = email.nomeDestinatario,
-                                fontSize = 20.sp
-                            )
-                        }
-                    }
-                    Row {
-                        Column() {
-                            Text(
-                                text = email.texto,
-                                fontSize = 20.sp
-                            )
-                        }
-                    }
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color(0xFF026773),
+                    ),
+                    shape = RoundedCornerShape(0.dp),
+                    border = BorderStroke(1.dp, Color.White),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(top = 3.dp)
+                ) {
+                    Text(
+                        text = email.texto,
+                        modifier = Modifier
+                            .padding(16.dp),
+                        color = Color.White
+                    )
                 }
-
-
 
             }
 
