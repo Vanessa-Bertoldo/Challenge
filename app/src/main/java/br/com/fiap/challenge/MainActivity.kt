@@ -1,5 +1,6 @@
 package br.com.fiap.challenge
 
+import EventActivity
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -28,7 +29,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             ChallengeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize().fillMaxHeight().background(Color(0xFF012E40))
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .fillMaxHeight()
+                        .background(Color(0xFF012E40))
                 ) {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "home") {
@@ -44,6 +48,9 @@ class MainActivity : ComponentActivity() {
                         composable(route = "detalhe-email/{idEmail}") {
                             val idEmail = it.arguments?.getString("idEmail")
                             DetalheEmail(navController, idEmail)
+                        }
+                        composable(route = "event") {
+                            EventActivity(navController = navController)
                         }
                     }
                 }

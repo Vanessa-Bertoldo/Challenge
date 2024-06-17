@@ -30,6 +30,7 @@ import br.com.fiap.challenge.model.Email
 
 @Composable
 fun NovoEmail(navController: NavController) {
+    var showDialog by remember { mutableStateOf(false) }
     var to by remember { mutableStateOf("") }
     var subject by remember { mutableStateOf("") }
     var body by remember { mutableStateOf("") }
@@ -64,6 +65,10 @@ fun NovoEmail(navController: NavController) {
         }
         showMessage = true
         navController.navigate("home")
+    }
+
+    fun createEvent(navController: NavController){
+        navController.navigate("event")
     }
 
     Scaffold(
@@ -113,16 +118,26 @@ fun NovoEmail(navController: NavController) {
                 }
                 item {
                     Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                        horizontalArrangement = Arrangement.SpaceEvenly,
                         modifier = Modifier
                             .background(Color.Black)
                             .fillMaxWidth()
                     ) {
-                        Button(onClick = { sendEmail(navController) }) {
+                        Button(
+                            onClick = { sendEmail(navController) },
+                            modifier = Modifier.weight(1f)
+                        ) {
                             Text(text = "Enviar")
+                        }
+                        Button(
+                            onClick = { createEvent(navController) },
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(text = "Adicionar Evento")
                         }
                     }
                 }
+
                 if (showMessage) {
                     item {
                         Text(
@@ -136,5 +151,5 @@ fun NovoEmail(navController: NavController) {
         }
     )
 
-
 }
+
