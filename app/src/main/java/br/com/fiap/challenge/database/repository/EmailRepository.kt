@@ -19,4 +19,10 @@ class EmailRepository(context: Context) {
     fun buscarTodosEmail(): List<Email> {
         return db.buscarTodosEmail()
     }
+
+    fun buscarTodosEventos(): List<Email> {
+        return db.buscarTodosEvento()
+    }
+
+
 }

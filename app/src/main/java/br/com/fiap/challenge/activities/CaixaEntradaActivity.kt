@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,6 +14,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -26,10 +30,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.fiap.challenge.R
 import br.com.fiap.challenge.components.TopBar
 import br.com.fiap.challenge.database.repository.EmailRepository
 
@@ -38,13 +44,29 @@ import br.com.fiap.challenge.database.repository.EmailRepository
 fun CaixaEntrada(navController: NavController) {
     Scaffold(
         topBar = {
-            TopBar("Caixa de Entrada", false, navController)
+            Row {
+                TopBar("Caixa de Entrada", false, navController)
+            }
+            
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate("novo-email") }) {
-                Icon(Icons.Default.Add, contentDescription = "Add")
+//            FloatingActionButton(onClick = { navController.navigate("novo-email") }) {
+//                Icon(Icons.Default.Add, contentDescription = "Add")
+//            }
+            FloatingActionButton(
+                onClick = { navController.navigate("calendario") },
+                containerColor = Color(0xFF012E40)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.calendar_icon),
+                    contentDescription = "",
+                    tint = Color.White
+                )
             }
+
         }
+
+
     ) { innerPadding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -75,6 +97,13 @@ fun CaixaEntrada(navController: NavController) {
             )
 
             buscarEmails(navController)
+
+            Button(onClick = { navController.navigate("novo-email") },
+                colors = ButtonDefaults.buttonColors(Color(0xFF026773),),
+                modifier = Modifier.padding(top = 5.dp)) {
+                Text(text = "+")
+
+            }
         }
     }
 }
@@ -89,7 +118,6 @@ fun buscarEmails(navController: NavController) {
     var listaEmail = emailRepository.buscarTodosEmail()
 
     for (i in listaEmail) {
-        Log.d("Iterator", i.toString())
         CardEmail(i.id, i.nomeAssunto, i.nomeDestinatario, navController)
     }
 }
@@ -129,9 +157,5 @@ fun CardEmail(
             fontSize = 15.sp,
             fontWeight = FontWeight.Bold
         )
-
-
     }
-
-
 }

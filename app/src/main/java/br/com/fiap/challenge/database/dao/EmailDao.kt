@@ -14,6 +14,9 @@ interface EmailDao {
     @Query("SELECT * FROM tbl_email")
     fun buscarTodosEmail(): List<Email>
 
+    @Query("SELECT * FROM tbl_email ORDER BY dt_evento ASC")
+    fun buscarTodosEvento(): List<Email>
+
     @Query("SELECT * FROM tbl_email WHERE id = :id")
     fun buscarEmailId(id: Long): Email
 }

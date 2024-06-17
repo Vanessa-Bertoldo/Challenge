@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -24,11 +25,13 @@ fun TopBar(titulo: String, voltarON: Boolean, navController: NavController) {
         modifier = Modifier.fillMaxWidth()) {
         TopAppBar(
             title = {
-                Text(
-                    text = titulo,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
+                Row {
+                    Text(
+                        text = titulo,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                }
             },
 
             colors = topAppBarColors(
@@ -41,13 +44,10 @@ fun TopBar(titulo: String, voltarON: Boolean, navController: NavController) {
                     IconButton(onClick = {
                         navController.popBackStack()
                     }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 }
             },
-
-
-            )
+        )
     }
-
 }

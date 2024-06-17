@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import br.com.fiap.challenge.model.Email
 
-@Database(entities = [Email::class], version = 1)
+@Database(entities = [Email::class], version = 2)
 abstract class EmailDb : RoomDatabase() {
 
     abstract fun emailDao(): EmailDao
@@ -24,7 +24,7 @@ abstract class EmailDb : RoomDatabase() {
                         "email_db"
                     )
                     .allowMainThreadQueries()
-//                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration()
                     .build()
             }
             return instance

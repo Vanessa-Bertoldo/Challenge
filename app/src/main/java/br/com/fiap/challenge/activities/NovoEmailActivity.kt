@@ -1,9 +1,9 @@
 package br.com.fiap.challenge.activities
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.challenge.components.TopBar
+import br.com.fiap.challenge.components.datePickerComponent
 import br.com.fiap.challenge.database.repository.EmailRepository
 import br.com.fiap.challenge.model.Email
 
@@ -36,6 +37,7 @@ fun NovoEmail(navController: NavController) {
     var body by remember { mutableStateOf("") }
     var showMessage by remember { mutableStateOf(false) }
     var message by remember { mutableStateOf("") }
+    var data by remember { mutableStateOf("") }
 
     val context = LocalContext.current
     val emailRepository = EmailRepository(context)
@@ -53,7 +55,8 @@ fun NovoEmail(navController: NavController) {
             nomeDestinatario = to,
             nomeAssunto = subject,
             texto = body,
-            nomeRemetente = ""
+            nomeRemetente = "",
+            dataEvento = data
         )
 
         val emailId = emailRepository.novoEmail(email)
@@ -65,10 +68,6 @@ fun NovoEmail(navController: NavController) {
         }
         showMessage = true
         navController.navigate("home")
-    }
-
-    fun createEvent(navController: NavController){
-        navController.navigate("event")
     }
 
     Scaffold(
@@ -114,7 +113,7 @@ fun NovoEmail(navController: NavController) {
                     )
                 }
                 item {
-                    Spacer(modifier = Modifier.height(16.dp))
+                     data = datePickerComponent()
                 }
                 item {
                     Row(
@@ -123,17 +122,12 @@ fun NovoEmail(navController: NavController) {
                             .background(Color.Black)
                             .fillMaxWidth()
                     ) {
+
                         Button(
                             onClick = { sendEmail(navController) },
                             modifier = Modifier.weight(1f)
                         ) {
                             Text(text = "Enviar")
-                        }
-                        Button(
-                            onClick = { createEvent(navController) },
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(text = "Adicionar Evento")
                         }
                     }
                 }
@@ -148,8 +142,12 @@ fun NovoEmail(navController: NavController) {
                     }
                 }
             }
+
         }
     )
 
 }
+
+
+
 
