@@ -2,13 +2,13 @@ package br.com.fiap.challenge.components
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,8 +16,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -45,16 +45,16 @@ fun datePickerComponent(): String {
     Column(
         Modifier
             .fillMaxSize()
-            .padding(16.dp), Arrangement.Center, Alignment.CenterHorizontally
+            .padding(16.dp)
     ) {
-        Button(onClick = { datePickerDialog.show() }) {
+        Button(onClick = { datePickerDialog.show() }, colors = ButtonDefaults.buttonColors(Color(0xFF012E40))) {
             Icon(
                 painter = painterResource(id = R.drawable.calendar_icon),
                 contentDescription = ""
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Selected Date: $selectedDate")
+        Text(text = "Data do Evento: $selectedDate", color = Color.White)
 
     }
 

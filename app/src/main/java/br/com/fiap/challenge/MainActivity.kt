@@ -1,6 +1,5 @@
 package br.com.fiap.challenge
 
-import EventActivity
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -48,9 +47,6 @@ class MainActivity : ComponentActivity() {
                         composable(route = "detalhe-email/{idEmail}") {
                             val idEmail = it.arguments?.getString("idEmail")
                             DetalheEmail(navController, idEmail)
-                        }
-                        composable(route = "event") {
-                            EventActivity(navController = navController)
                         }
                     }
                 }

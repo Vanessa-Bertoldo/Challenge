@@ -12,6 +12,15 @@ class EmailRepository(context: Context) {
         return db.novoEmail(email = email)
     }
 
+    fun mudarImportanciaEmail(email: Email) {
+        return db.mudarImportanciaEmail(email = email)
+    }
+
+
+    fun deletarEmail(email: Email){
+        return db.deletarEmail(email)
+    }
+
     fun buscarEmailId(id: Long?): Email {
         return db.buscarEmailId(id = id!!)
     }
@@ -19,6 +28,10 @@ class EmailRepository(context: Context) {
     fun buscarTodosEmail(): List<Email> {
         return db.buscarTodosEmail()
     }
+
+//    fun buscarTodosEmailAssunto(palavra: String): List<Email> {
+//        return db.buscarTodosEventoAssunto(palavra)
+//    }
 
     fun buscarTodosEventos(): List<Email> {
         return db.buscarTodosEvento()
