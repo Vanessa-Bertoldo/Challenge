@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">challenge</string>
+    <string name="title_activity_leitor_email">LeitorEmailActivity</string>
 </resources>

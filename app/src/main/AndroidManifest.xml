@@ -13,6 +13,22 @@
         android:theme="@style/Theme.Challenge"
         tools:targetApi="31">
         <activity
+            android:name=".activities.eventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ScheduleActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".activities.LeitorEmailActivity" -->
+        <!-- android:exported="true" -->
+        <!-- android:label="@string/title_activity_leitor_email" -->
+        <!-- android:theme="@style/Theme.Challenge" /> -->
+        <!-- <activity -->
+        <!-- android:name=".activities.CaixaEntradaActivity" -->
+        <!-- android:exported="false"/> -->
+        <activity
+            android:name=".activities.CalendarActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
