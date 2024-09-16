@@ -39,7 +39,7 @@ import androidx.navigation.NavController
 import br.com.fiap.challenge.R
 import br.com.fiap.challenge.components.datePickerComponent
 import br.com.fiap.challenge.database.repository.EmailRepository
-import br.com.fiap.challenge.model.Email
+import br.com.fiap.challenge.model.EmailDB
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -206,7 +206,7 @@ fun sendEmail(
     context: Context
 ) {
 
-    val email = Email(
+    val emailDB = EmailDB(
         nomeDestinatario = to,
         nomeAssunto = subject,
         texto = body,
@@ -215,7 +215,7 @@ fun sendEmail(
     )
 
     val emailRepository = EmailRepository(context)
-    emailRepository.novoEmail(email)
+    emailRepository.novoEmail(emailDB)
 
     navController.navigate("home")
 }

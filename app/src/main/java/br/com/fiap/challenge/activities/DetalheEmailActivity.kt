@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.challenge.components.TopBar
 import br.com.fiap.challenge.database.repository.EmailRepository
-import br.com.fiap.challenge.model.Email
+import br.com.fiap.challenge.model.EmailDB
 
 
 @Composable
@@ -92,7 +92,7 @@ fun DetalheEmail(navController: NavController, idEmail: String?) {
 }
 
 @Composable
-fun buscarEmailId(idEmail: Long?): Email {
+fun buscarEmailId(idEmail: Long?): EmailDB {
 
     val context = LocalContext.current
     val emailRepository = EmailRepository(context)

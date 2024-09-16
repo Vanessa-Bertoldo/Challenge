@@ -1,6 +1,7 @@
 package br.com.fiap.challenge.activities
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -42,6 +43,11 @@ import androidx.navigation.NavController
 import br.com.fiap.challenge.R
 import br.com.fiap.challenge.components.TopBar
 import br.com.fiap.challenge.database.repository.EmailRepository
+import br.com.fiap.challenge.model.Email
+import br.com.fiap.challenge.service.RetrofitFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 @Composable
@@ -228,17 +234,43 @@ fun CardEmail(
 }
 
 
+//@Composable
+//fun buscarEmails(navController: NavController) {
+//
+//    val context = LocalContext.current
+//    val emailRepository = EmailRepository(context)
+//
+//    var listaEmail = emailRepository.buscarTodosEmail()
+//
+//    for (i in listaEmail) {
+//        CardEmail(i.id, i.nomeAssunto, i.nomeDestinatario, i.flagImportante, navController)
+//    }
+//}
+
 @Composable
 fun buscarEmails(navController: NavController) {
 
     val context = LocalContext.current
-    val emailRepository = EmailRepository(context)
 
-    var listaEmail = emailRepository.buscarTodosEmail()
+    var call = RetrofitFactory().getEmailService().getAllEmails("1")
 
-    for (i in listaEmail) {
-        CardEmail(i.id, i.nomeAssunto, i.nomeDestinatario, i.flagImportante, navController)
-    }
+    call.enqueue(object : Callback<List<Email>> {
+
+        override fun onResponse(call: Call<List<Email>>, response: Response<List<Email>>) {
+            Log.i("onResponse", "Mensage: ${response.body()} ")
+        }
+
+        override fun onFailure(call: Call<List<Email>>, t: Throwable) {
+            TODO("Not yet implemented")
+        }
+    })
+//    val emailRepository = EmailRepository(context)
+
+//    var listaEmail = emailRepository.buscarTodosEmail()
+
+//    for (i in listaEmail) {
+//        CardEmail(i.id, i.nomeAssunto, i.nomeDestinatario, i.flagImportante, navController)
+//    }
 }
 
 fun importanciaEmail(navController: NavController, idEmail: Long, context: Context) {

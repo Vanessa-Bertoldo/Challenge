@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import br.com.fiap.challenge.model.Email
+import br.com.fiap.challenge.model.EmailDB
 
-@Database(entities = [Email::class], version = 2)
+@Database(entities = [EmailDB::class], version = 2)
 abstract class EmailDb : RoomDatabase() {
 
     abstract fun emailDao(): EmailDao
