@@ -1,6 +1,7 @@
 package br.com.fiap.challenge.activities
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,8 +39,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.challenge.R
 import br.com.fiap.challenge.components.datePickerComponent
-import br.com.fiap.challenge.database.repository.EmailRepository
-import br.com.fiap.challenge.model.EmailDB
+import br.com.fiap.challenge.model.Email
+import br.com.fiap.challenge.service.RetrofitFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,14 +90,23 @@ fun NovoEmail(navController: NavController) {
                 },
                 actions = {
                     IconButton(onClick = {
-                        sendEmail(
-                            navController,
-                            to,
-                            subject,
-                            body,
-                            data,
-                            context
-                        )
+
+                        val email = Email(subject, body, false, false,false,false, to, "vanessa@123")
+
+                        // Chamada da API
+                        val call = RetrofitFactory().getEmailService().sendEmail(email)
+
+                        call.enqueue(object : Callback<Void> {
+                            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                                navController.navigate("home")
+                            }
+
+                            override fun onFailure(call: Call<Void>, t: Throwable) {
+                                Log.e("onFailure", "Erro: ${t.message}")
+                            }
+                        })
+
+
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.send_icon),
@@ -158,12 +171,17 @@ fun NovoEmail(navController: NavController) {
 
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+                                .fillMaxWidth()
                         ) {
                             Checkbox(
                                 checked = isChecked,
                                 onCheckedChange = { isChecked = it },
-                                colors = CheckboxDefaults.colors(checkmarkColor = Color.White, uncheckedColor = Color(0xFF012E40))
+                                colors = CheckboxDefaults.colors(
+                                    checkmarkColor = Color.White,
+                                    uncheckedColor = Color(0xFF012E40)
+                                )
                             )
                             Text(text = "Organizar evento para email", color = Color.White)
 
@@ -197,28 +215,20 @@ fun NovoEmail(navController: NavController) {
     )
 }
 
-fun sendEmail(
-    navController: NavController,
-    to: String,
-    subject: String,
-    body: String,
-    data: String,
-    context: Context
-) {
-
-    val emailDB = EmailDB(
-        nomeDestinatario = to,
-        nomeAssunto = subject,
-        texto = body,
-        nomeRemetente = "",
-        dataEvento = data
-    )
-
-    val emailRepository = EmailRepository(context)
-    emailRepository.novoEmail(emailDB)
-
-    navController.navigate("home")
-}
+//fun sendEmail(
+//    navController: NavController,
+//    to: String,
+//    subject: String,
+//    body: String,
+//    data: String,
+//    context: Context
+//) {
+//
+//
+//    fact
+//
+//    navController.navigate("home")
+//}
 
 
 

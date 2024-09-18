@@ -15,17 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.challenge.components.TopBar
-import br.com.fiap.challenge.database.repository.EmailRepository
-import br.com.fiap.challenge.model.EmailDB
 
 
 @Composable
-fun DetalheEmail(navController: NavController, idEmail: String?) {
+fun DetalheEmail(navController: NavController, assunto: String?, corpo: String?) {
 
     Scaffold(
         topBar = {
@@ -41,8 +38,6 @@ fun DetalheEmail(navController: NavController, idEmail: String?) {
                     .fillMaxHeight()
                     .padding(innerPadding)
             ) {
-                val email = buscarEmailId(idEmail?.toLong())
-
 
                 Card(
                     colors = CardDefaults.cardColors(
@@ -54,13 +49,15 @@ fun DetalheEmail(navController: NavController, idEmail: String?) {
                     shape = RoundedCornerShape(0.dp),
                     border = BorderStroke(1.dp, Color.White)
                 ) {
-                    Text(
-                        text = email.nomeAssunto,
-                        modifier = Modifier
-                            .padding(16.dp),
-                        textAlign = TextAlign.Center,
-                        color = Color.White
-                    )
+                    if (assunto != null) {
+                        Text(
+                            text = assunto,
+                            modifier = Modifier
+                                .padding(16.dp),
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
                 }
 
                 Card(
@@ -74,12 +71,14 @@ fun DetalheEmail(navController: NavController, idEmail: String?) {
                         .fillMaxHeight()
                         .padding(top = 3.dp)
                 ) {
-                    Text(
-                        text = email.texto,
-                        modifier = Modifier
-                            .padding(16.dp),
-                        color = Color.White
-                    )
+                    if (corpo != null) {
+                        Text(
+                            text = corpo,
+                            modifier = Modifier
+                                .padding(16.dp),
+                            color = Color.White
+                        )
+                    }
                 }
 
             }
@@ -87,15 +86,5 @@ fun DetalheEmail(navController: NavController, idEmail: String?) {
 
         }
     )
-
-
 }
 
-@Composable
-fun buscarEmailId(idEmail: Long?): EmailDB {
-
-    val context = LocalContext.current
-    val emailRepository = EmailRepository(context)
-
-    return emailRepository.buscarEmailId(idEmail)
-}

@@ -44,9 +44,10 @@ class MainActivity : ComponentActivity() {
                         composable(route = "calendario") {
                             EventoActivity(navController)
                         }
-                        composable(route = "detalhe-email/{idEmail}") {
-                            val idEmail = it.arguments?.getString("idEmail")
-                            DetalheEmail(navController, idEmail)
+                        composable(route = "detalhe-email/{assunto}/{corpo}") {
+                            val assunto = it.arguments?.getString("assunto")
+                            val corpo = it.arguments?.getString("corpo")
+                            DetalheEmail(navController, assunto, corpo)
                         }
                     }
                 }
